@@ -25,11 +25,10 @@ namespace Task.Generics
             string res = "";
             foreach (var item in list)
             {
-
                 res += item.ToString();
                 res += ',';
             }
-            res = res.Remove(res.Length-1, 1);
+            res = res.Remove(res.Length - 1, 1);
             return res;
         }
 
@@ -37,7 +36,7 @@ namespace Task.Generics
         ///   Converts the string respresentation to the list of items
         /// </summary>
         /// <typeparam name="T">required type of output items</typeparam>
-        /// <param name="list">string representation of the list</param>
+        /// <param name="string_list">string representation of the list</param>
         /// <returns>
         ///   Returns the list of items from specified string
         /// </returns>
@@ -49,7 +48,7 @@ namespace Task.Generics
         ///  "Black,Blue,Cyan" for ConsoleColor => { ConsoleColor.Black, ConsoleColor.Blue, ConsoleColor.Cyan }
         ///  "1:00:00,0:00:30" for TimeSpan =>  { new TimeSpan(1, 0, 0), new TimeSpan(0, 0, 30) },
         ///  </example>
-        public static IEnumerable<T> ConvertToList<T>(this string list)
+        public static IEnumerable<T> ConvertToList<T>(this string string_list)
         {
             throw new NotImplementedException();
         }
@@ -66,7 +65,9 @@ namespace Task.Generics
         /// <param name="index2">second index</param>
         public static void SwapArrayElements<T>(this T[] array, int index1, int index2)
         {
-            throw new NotImplementedException();
+            T tmp = array[index1];
+            array[index1] = array[index2];
+            array[index2] = tmp;
         }
 
         /// <summary>
