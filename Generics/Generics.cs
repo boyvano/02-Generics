@@ -101,6 +101,37 @@ namespace Task.Generics
             where T2 : IComparable<T2>
             where T3 : IComparable<T3>
         {
+            if (array.Length > 1)
+            {
+                switch (sortedColumn)
+                {
+                    case 0:
+                        {
+                            if (ascending == false)
+                                Array.Sort<Tuple<T1, T2, T3>>(array, (a, b) => b.Item1.CompareTo(a.Item1));
+                            else
+                                Array.Sort<Tuple<T1, T2, T3>>(array, (a, b) => a.Item1.CompareTo(b.Item1));
+                        }
+                        break;
+                    case 1:
+                        {
+                            if (ascending == false)
+                                Array.Sort<Tuple<T1, T2, T3>>(array, (a, b) => b.Item2.CompareTo(a.Item2));
+                            else
+                                Array.Sort<Tuple<T1, T2, T3>>(array, (a, b) => a.Item2.CompareTo(b.Item2));
+                        }
+                        break;
+                    default:
+                        {
+                            if (ascending == false)
+                                Array.Sort<Tuple<T1, T2, T3>>(array, (a, b) => b.Item3.CompareTo(a.Item3));
+                            else
+                                Array.Sort<Tuple<T1, T2, T3>>(array, (a, b) => a.Item3.CompareTo(b.Item3));
+                        }
+                        break;
+
+                }
+            }
         }
     }
 }
