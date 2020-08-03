@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Task.Generics
 {
@@ -22,14 +23,7 @@ namespace Task.Generics
         /// </example>
         public static string ConvertToString<T>(this IEnumerable<T> list)
         {
-            string res = "";
-            foreach (var item in list)
-            {
-                res += item.ToString();
-                res += ',';
-            }
-            res = res.Remove(res.Length - 1, 1);
-            return res;
+            return string.Join(",", list);
         }
 
         /// <summary>
@@ -50,7 +44,12 @@ namespace Task.Generics
         ///  </example>
         public static IEnumerable<T> ConvertToList<T>(this string string_list)
         {
-            throw new NotImplementedException();
+            var typeConverter = System.ComponentModel.TypeDescriptor.GetConverter(typeof(T));
+            foreach (var item in string_list.Split(','))
+            {
+                yield return (T)typeConverter.ConvertFromString(item);
+            }
+
         }
     }
 
