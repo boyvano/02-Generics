@@ -145,7 +145,11 @@ namespace Task.Generics
 public static class Singleton<T>
     where T : new()
 {
-    public static T Instance => new T();
+    private static readonly T instance = new T();
+    public static T Instance
+    {
+        get { return instance; }
+    }
 }
 
 public static class FunctionExtentions
