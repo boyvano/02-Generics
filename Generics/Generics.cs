@@ -170,6 +170,19 @@ public static class FunctionExtentions
     /// </example>
     public static T TimeoutSafeInvoke<T>(this Func<T> function)
     {
+        int retryCount = 3;
+        for (int i = 0; i < retryCount - 1; i++)
+        {
+            try
+            {
+                return function();
+            }
+            catch (System.Net.WebException exception)
+            {
+                System.Diagnostics.Trace.WriteLine(exception);
+            }
+        }
+
         return function();
     }
 
