@@ -199,6 +199,16 @@ public static class FunctionExtentions
     /// </example>
     public static Predicate<T> CombinePredicates<T>(IEnumerable<Predicate<T>> predicates)
     {
-        throw new NotImplementedException();
+        return delegate (T item)
+        {
+            foreach (Predicate<T> predicate in predicates)
+            {
+                if (!predicate(item))
+                {
+                    return false;
+                }
+            }
+            return true;
+        };
     }
 }
